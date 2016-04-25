@@ -38,3 +38,5 @@ enter 就會是換行
 
 
 alt Enter 可以顯示有哪些function 一定要寫
+
+adb.exe 刪除, 即可重build
