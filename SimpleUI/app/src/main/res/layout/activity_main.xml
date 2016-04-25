@@ -18,7 +18,7 @@
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Click"
+        android:text="Submit"
         android:id="@+id/button"
         android:enabled="true"
         android:onClick="click"
@@ -46,15 +46,15 @@
         <RadioButton
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Male"
-            android:id="@+id/maleRadioButton"
+            android:text="Black Tea"
+            android:id="@+id/blackTeaRadioButton"
             android:checked="true" />
 
         <RadioButton
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Female"
-            android:id="@+id/femaleRadioButton"
+            android:text="Green Tea"
+            android:id="@+id/greenTeaRadioButton"
             android:checked="false" />
     </RadioGroup>
 
@@ -66,5 +66,6 @@
         android:layout_alignBottom="@+id/button"
         android:layout_toRightOf="@+id/button"
         android:layout_toEndOf="@+id/button"
-        android:checked="false" />
+        android:checked="false"
+        android:enabled="false" />
 </RelativeLayout>
