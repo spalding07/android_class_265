@@ -68,4 +68,11 @@
         android:layout_toEndOf="@+id/button"
         android:checked="false"
         android:enabled="false" />
+
+    <ListView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/listView"
+        android:layout_below="@+id/button"
+        android:layout_alignParentLeft="true" />
 </RelativeLayout>
