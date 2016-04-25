@@ -45,6 +45,7 @@ public class OrderAdapter extends BaseAdapter{
 
             holder.drinkName = (TextView)convertView.findViewById(R.id.drinkName);
             holder.note = (TextView)convertView.findViewById(R.id.note);
+            holder.storeInfo = (TextView)convertView.findViewById(R.id.store);
 
             convertView.setTag(holder);
         }else{
@@ -53,6 +54,7 @@ public class OrderAdapter extends BaseAdapter{
 
         holder.drinkName.setText(orders.get(position).drinkName);
         holder.note.setText(orders.get(position).note);
+        holder.storeInfo.setText(orders.get(position).storeInfo);
 
         return convertView;
     }
@@ -60,5 +62,6 @@ public class OrderAdapter extends BaseAdapter{
     class Holder{
         TextView drinkName;
         TextView note;
+        TextView storeInfo;
     }
 }
