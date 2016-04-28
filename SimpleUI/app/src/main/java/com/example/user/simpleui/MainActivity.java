@@ -50,6 +50,12 @@ public class MainActivity extends AppCompatActivity {
 
         sp = getSharedPreferences("setting", Context.MODE_PRIVATE); //取得 setting 這本字典
         editor = sp.edit(); //把setting這本字典專用的筆拿出來
+
+        String[] data = Utils.readFile(this,"notes").split("\n");
+
+        //editText.setText(data[1]);
+        textView.setText(Utils.readFile(this,"notes"));
+
         editText.setText(sp.getString("editText", ""));
 
         editText.setOnKeyListener(new View.OnKeyListener() {
@@ -125,6 +131,8 @@ public class MainActivity extends AppCompatActivity {
         order.storeInfo = (String) spinner.getSelectedItem();
 
         orders.add(order);
+
+        Utils.writeFile(this, "notes", order.note + "\n");
 
         editText.setText("");
 
