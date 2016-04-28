@@ -1,5 +1,7 @@
 package com.example.user.simpleui;
 
+import android.content.Context;
+import android.content.SharedPreferences;
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -31,6 +33,9 @@ public class MainActivity extends AppCompatActivity {
     Spinner spinner;
     ListView listView;
 
+    SharedPreferences sp;
+    SharedPreferences.Editor editor;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -39,13 +44,20 @@ public class MainActivity extends AppCompatActivity {
         editText = (EditText) findViewById(R.id.editText);
         radioGroup = (RadioGroup) findViewById(R.id.radioGroup);
         checkBox = (CheckBox) findViewById(R.id.hideCheckBox);
-        listView = (ListView)findViewById(R.id.listView);
-        spinner = (Spinner)findViewById(R.id.spinner);
+        listView = (ListView) findViewById(R.id.listView);
+        spinner = (Spinner) findViewById(R.id.spinner);
         orders = new ArrayList<>();
+
+        sp = getSharedPreferences("setting", Context.MODE_PRIVATE); //取得 setting 這本字典
+        editor = sp.edit(); //把setting這本字典專用的筆拿出來
+        editText.setText(sp.getString("editText", ""));
 
         editText.setOnKeyListener(new View.OnKeyListener() {
             @Override
             public boolean onKey(View v, int keyCode, KeyEvent event) {
+                String text = editText.getText().toString();
+                editor.putString("editText", text);
+                editor.apply();
                 if (keyCode == KeyEvent.KEYCODE_ENTER && event.getAction() == KeyEvent.ACTION_DOWN) {
                     click(v);
                     return true;    //true -> 攔截下來，結束，不會回傳到EditText上面  ； false 會繼續執行，介面就會接到 Enter
@@ -76,7 +88,7 @@ public class MainActivity extends AppCompatActivity {
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                Order order = (Order)parent.getAdapter().getItem(position);
+                Order order = (Order) parent.getAdapter().getItem(position);
                 //Toast.makeText(MainActivity.this, order.note, Toast.LENGTH_SHORT).show();
                 Snackbar.make(view, order.note, Snackbar.LENGTH_LONG).show();
             }
@@ -85,16 +97,16 @@ public class MainActivity extends AppCompatActivity {
         setupSpinner();
     }
 
-    public void setupSpinner(){
+    public void setupSpinner() {
         String[] data = getResources().getStringArray(R.array.storeInfo);
-        ArrayAdapter<String> arrayAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_dropdown_item,data);
+        ArrayAdapter<String> arrayAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_dropdown_item, data);
         spinner.setAdapter(arrayAdapter);
     }
 
-    public void setupListView(){
+    public void setupListView() {
         //ArrayAdapter<String> adapter= new ArrayAdapter<String>(this,android.R.layout.simple_list_item_1,orders);
         //listView.setAdapter(adapter);
-        OrderAdapter orderAdapter = new OrderAdapter(this,orders);
+        OrderAdapter orderAdapter = new OrderAdapter(this, orders);
         listView.setAdapter(orderAdapter);
     }
 
@@ -106,7 +118,7 @@ public class MainActivity extends AppCompatActivity {
         Order order = new Order();
         order.drinkName = drinkName;
         order.note = note;
-        order.storeInfo = (String)spinner.getSelectedItem();
+        order.storeInfo = (String) spinner.getSelectedItem();
 
         orders.add(order);
 

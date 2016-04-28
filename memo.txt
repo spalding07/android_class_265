@@ -47,6 +47,7 @@ adb.exe 刪除, 即可重build
 資料記錄在手機上
 選擇選到的資料
 
+------------------------------------
 點擊listView上的item
 
 snackbar 取代 toast
@@ -54,4 +55,17 @@ snackbar 取代 toast
 1. 彈出來的snackbar 可以再點擊 or 觸發，再執行另一個動作  .setAction()
 2. 元件有關聯, 例如彈出snackbar，下方有設定button，會一起往上彈
 3. snackbar 按了會更新, toast 是排程顯示，不即時
+需要透過 gradle 下載 build.grade
+compile 'com.android.support:design:23.2.1'
 
+------------------------------------
+1. SharedPreferences (小的, 元件)
+2. read write file (中的)
+3. SQLite database (大的, listView) -> nosql library
+
+
+1. SharedPreferences 可以想成 字典庫
+SharedPreferences 只有讀取,要寫入要叫他的 .Editor
+-> 選字典->查資料
+Context.MODE_PRIVATE 可讀取,可寫入
+儲存在記憶體，是有上限的。 少量資料，存user資料
