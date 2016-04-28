@@ -70,4 +70,14 @@ SharedPreferences 只有讀取,要寫入要叫他的 .Editor
 Context.MODE_PRIVATE 可讀取,可寫入
 儲存在記憶體，是有上限的。 少量資料，存user資料
 
+Android 推薦的存取方式
+
+
+如何找library 
+=> 搜尋 awesome android
+
+現在用到這一個
+https://github.com/wasabeef/awesome-android-libraries
+這次練習 Realm
+https://realm.io/
 第一份作業
