@@ -77,10 +77,14 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
+        radioGroup.check(sp.getInt("radioGroup", R.id.blackTeaRadioButton));
+
         radioGroup.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(RadioGroup group, int checkedId) {
                 RadioButton radioButton = (RadioButton) findViewById(checkedId);
+                editor.putInt("radioGroup", checkedId);
+                editor.apply();
                 drinkName = radioButton.getText().toString();
             }
         });

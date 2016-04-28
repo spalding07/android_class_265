@@ -69,3 +69,5 @@ SharedPreferences 只有讀取,要寫入要叫他的 .Editor
 -> 選字典->查資料
 Context.MODE_PRIVATE 可讀取,可寫入
 儲存在記憶體，是有上限的。 少量資料，存user資料
+
+第一份作業
