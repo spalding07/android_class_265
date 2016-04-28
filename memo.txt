@@ -40,3 +40,18 @@ enter 就會是換行
 alt Enter 可以顯示有哪些function 一定要寫
 
 adb.exe 刪除, 即可重build
+
+====================================
+第4堂 
+====================================
+資料記錄在手機上
+選擇選到的資料
+
+點擊listView上的item
+
+snackbar 取代 toast
+6.0版本 23版, 支援到18之後
+1. 彈出來的snackbar 可以再點擊 or 觸發，再執行另一個動作  .setAction()
+2. 元件有關聯, 例如彈出snackbar，下方有設定button，會一起往上彈
+3. snackbar 按了會更新, toast 是排程顯示，不即時
+
