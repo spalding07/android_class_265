@@ -114,6 +114,24 @@ public class MainActivity extends AppCompatActivity {
         });
         setupListView();
         setupSpinner();
+
+        // ------ 作業1 start ------
+        int spinnerSelected = sp.getInt("spinnerSelected", 0);
+        spinner.setSelection(spinnerSelected);
+
+        spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                editor.putInt("spinnerSelected", position);
+                editor.apply();
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+
+            }
+        });
+        // ------ 作業1 end ------
     }
 
     public void setupSpinner() {
