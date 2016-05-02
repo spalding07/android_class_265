@@ -1,5 +1,6 @@
 package com.example.user.simpleui;
 
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -34,6 +35,11 @@ public class DrinkMenuActivity extends AppCompatActivity {
     }
 
     public void done(View view) {   //紀錄介面所有的杯數，傳回到前一頁
+        Intent intent = new Intent();   //activity之間的溝通使用intent
+        intent.putExtra("result", getData().toString());
+
+        setResult(RESULT_OK, intent);
+        finish();
     }
 
     public JSONArray getData() {
@@ -50,7 +56,7 @@ public class DrinkMenuActivity extends AppCompatActivity {
 
             String drinkName = textView.getText().toString();
             int m = Integer.parseInt(mButton.getText().toString());
-            int l = Integer.parseInt(textView.getText().toString());
+            int l = Integer.parseInt(lButton.getText().toString());
 
             JSONObject jsonObject = new JSONObject();
             try {

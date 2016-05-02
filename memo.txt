@@ -118,3 +118,6 @@ Main Activity On Created
 linearLayout 的 
 layout: weight -> 佔版面的比例權重
 Layout: width: 0dp
+
+
+憶體or儲存資料相關異動,資料有問題，可以刪除app重新跑
