@@ -81,3 +81,40 @@ https://github.com/wasabeef/awesome-android-libraries
 這次練習 Realm
 https://realm.io/
 第一份作業
+
+====================================
+第5堂 
+====================================
+1. activity 生命週期  (配合講義)
+onCreate 必須設定 使用的頁面
+綠色框框 -> 螢幕顯示權
+紅色框框 -> 搶到螢幕控制權(互動)，所以同時間，只會有一個activity
+舊有的要先onPause，新的才能onCreate
+
+一般會在onStop()把資料做儲存的動作，以免資料遺失
+
+
+Main Activity On Created
+> Main Activity OnStart
+> Main Activity OnResume
+
+------點擊觸發 DrinkMenuActivity 
+> Main Activity OnPause
+> DrinkMenuActivity OnCreate
+> DrinkMenuActivity OnStart
+> DrinkMenuActivity OnResume
+> Main Activity OnStop
+
+------點擊 返回
+> DrinkMenuActivity OnPause
+> Main Activity OnRestart
+> Main Activity OnStart
+> Main Activity OnResume
+> DrinkMenuActivity OnStop
+> DrinkMenuActivity OnDestroy
+
+
+------------------------------------
+linearLayout 的 
+layout: weight -> 佔版面的比例權重
+Layout: width: 0dp
