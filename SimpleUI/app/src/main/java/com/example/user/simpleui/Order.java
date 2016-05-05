@@ -1,11 +1,14 @@
 package com.example.user.simpleui;
 
+import com.parse.ParseObject;
+import com.parse.SaveCallback;
+
 import io.realm.RealmObject;
 
 /**
  * Created by user on 2016/4/25.
  */
-public class Order extends RealmObject{
+public class Order extends RealmObject {
     private String note;
     private String menuResults;
     private String storeInfo;
@@ -32,5 +35,14 @@ public class Order extends RealmObject{
 
     public void setStoreInfo(String storeInfo) {
         this.storeInfo = storeInfo;
+    }
+
+    public void saveToRemote(SaveCallback saveCallback) {
+        ParseObject parseObject = new ParseObject("Order");
+        parseObject.put("note", note);
+        parseObject.put("storeInfo", storeInfo);
+        parseObject.put("menuResults", menuResults);
+
+        parseObject.saveInBackground(saveCallback);
     }
 }

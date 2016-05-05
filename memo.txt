@@ -121,3 +121,42 @@ Layout: width: 0dp
 
 
 憶體or儲存資料相關異動,資料有問題，可以刪除app重新跑
+
+====================================
+第6堂 
+====================================
+https://www.back4app.com/
+s*******07
+s*****9
+
+https://docs.back4app.com/ 
+-> New Parse App document
+
+facebook 作的 parse server 
+https://parse.com/
+-> 文件 	https://parse.com/docs
+-> Android guid  	https://parse.com/docs/android/guide
+-> quickStart
+-> 複製 Connect your app to Parse Server
+
+App Id
+o6Fgymu3e2E9KeaZBrVvdqWXUd5ne6OlOhKiURmY
+
+4.0版本後，網路的存取需要自己設定，需要在manifest設定
+
+<uses-permission android:name="android.permission.INTERNET"></uses-permission>
+
+
+//        ParseObject testObject = new ParseObject("TestObject");
+//        testObject.put("foo", "bar");
+//        testObject.saveInBackground(new SaveCallback() {
+//            @Override
+//            public void done(ParseException e) {
+//                if (e != null) {
+//                    //Toast.makeText(MainActivity.this, "save fail", Toast.LENGTH_LONG).show();
+//                    Toast.makeText(MainActivity.this, e.toString(), Toast.LENGTH_LONG).show();
+//                } else {
+//                    Toast.makeText(MainActivity.this, "save success", Toast.LENGTH_LONG).show();
+//                }
+//            }
+//        });
