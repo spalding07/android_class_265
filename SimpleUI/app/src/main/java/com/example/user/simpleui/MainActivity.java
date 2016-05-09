@@ -15,6 +15,7 @@ import android.widget.ArrayAdapter;
 import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.ListView;
+import android.widget.ProgressBar;
 import android.widget.RadioGroup;
 import android.widget.Spinner;
 import android.widget.TextView;
@@ -46,6 +47,8 @@ public class MainActivity extends AppCompatActivity {
     String note = "";
     CheckBox checkBox;
     Spinner spinner;
+    ProgressBar progressBar;
+
     String menuResults = "";
     ListView listView;
 
@@ -64,6 +67,7 @@ public class MainActivity extends AppCompatActivity {
         checkBox = (CheckBox) findViewById(R.id.hideCheckBox);
         listView = (ListView) findViewById(R.id.listView);
         spinner = (Spinner) findViewById(R.id.spinner);
+        progressBar = (ProgressBar)findViewById(R.id.progressBar);
         orders = new ArrayList<>();
 
         sp = getSharedPreferences("setting", Context.MODE_PRIVATE); //取得 setting 這本字典
@@ -141,6 +145,8 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void setupListView() {
+        //進度條 顯示
+        progressBar.setVisibility(View.VISIBLE);
 
         final RealmResults results = realm.allObjects(Order.class);
         OrderAdapter orderAdapter = new OrderAdapter(MainActivity.this, results.subList(0, results.size()));
@@ -152,6 +158,9 @@ public class MainActivity extends AppCompatActivity {
             public void done(List<ParseObject> objects, ParseException e) {
                 if (e != null) {
                     Toast.makeText(MainActivity.this, e.getMessage(), Toast.LENGTH_LONG).show();
+                    //進度條 隱藏
+                    progressBar.setVisibility(View.GONE);
+
                     return;
                 }
                 List<Order> orders = new ArrayList<Order>();
@@ -172,6 +181,8 @@ public class MainActivity extends AppCompatActivity {
                     }
                 }
                 realm.close();
+
+                progressBar.setVisibility(View.GONE);
 
                 OrderAdapter adapter = new OrderAdapter(MainActivity.this, orders);
                 listView.setAdapter(adapter);
