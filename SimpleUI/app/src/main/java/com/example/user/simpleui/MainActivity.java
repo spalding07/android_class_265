@@ -164,9 +164,30 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void setupSpinner() {
-        String[] data = getResources().getStringArray(R.array.storeInfo);
-        ArrayAdapter<String> arrayAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_dropdown_item, data);
-        spinner.setAdapter(arrayAdapter);
+        //從 設定檔 取得清單
+//        String[] data = getResources().getStringArray(R.array.storeInfo);
+//        ArrayAdapter<String> arrayAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_dropdown_item, data);
+//        spinner.setAdapter(arrayAdapter);
+
+        //從 parse Server 取得清單
+        ParseQuery<ParseObject> query = new ParseQuery<ParseObject>("StoreInfo");
+        query.findInBackground(new FindCallback<ParseObject>() {
+            @Override
+            public void done(List<ParseObject> objects, ParseException e) {
+                if (e != null) {    //錯誤訊息
+                    Toast.makeText(MainActivity.this, e.getMessage(), Toast.LENGTH_LONG).show();
+                    return;
+                }
+                int size = objects.size();
+                String[] list = new String[size];
+                for (int i = 0; i < size; i++) {
+                    list[i] = objects.get(i).getString("name");
+                }
+                ArrayAdapter<String> arrayAdapter = new ArrayAdapter<String>(MainActivity.this, android.R.layout.simple_spinner_dropdown_item, list);
+                spinner.setAdapter(arrayAdapter);
+            }
+        });
+
     }
 
     public void setupListView() {
@@ -231,7 +252,7 @@ public class MainActivity extends AppCompatActivity {
             byte[] photo = Utils.uriToBytes(this, uri);
             if (photo == null) {
                 Log.d("Debug", "Read Photo Fail");
-            }else{
+            } else {
                 order.photo = photo;
             }
         }
