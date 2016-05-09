@@ -142,21 +142,21 @@ public class MainActivity extends AppCompatActivity {
 
     public void setupListView() {
 
+        final RealmResults results = realm.allObjects(Order.class);
+        OrderAdapter orderAdapter = new OrderAdapter(MainActivity.this, results.subList(0, results.size()));
+        listView.setAdapter(orderAdapter);
+
         ParseQuery<ParseObject> query = new ParseQuery<ParseObject>("Order");
         query.findInBackground(new FindCallback<ParseObject>() {
             @Override
             public void done(List<ParseObject> objects, ParseException e) {
                 if (e != null) {
                     Toast.makeText(MainActivity.this, e.getMessage(), Toast.LENGTH_LONG).show();
-                    //取得本機資料
-                    Realm realm = Realm.getDefaultInstance();
-                    RealmResults results = realm.allObjects(Order.class);
-                    OrderAdapter orderAdapter = new OrderAdapter(MainActivity.this, results.subList(0, results.size()));
-                    listView.setAdapter(orderAdapter);
-                    realm.close();
                     return;
                 }
                 List<Order> orders = new ArrayList<Order>();
+
+                Realm realm = Realm.getDefaultInstance();
 
                 for (int i = 0; i < objects.size(); i++) {
                     Order order = new Order();
@@ -164,7 +164,15 @@ public class MainActivity extends AppCompatActivity {
                     order.setStoreInfo(objects.get(i).getString("storeInfo"));
                     order.setMenuResults(objects.get(i).getString("menuResults"));
                     orders.add(order);
+
+                    if (results.size() <= i) {
+                        realm.beginTransaction();
+                        realm.copyToRealm(order);
+                        realm.commitTransaction();
+                    }
                 }
+                realm.close();
+
                 OrderAdapter adapter = new OrderAdapter(MainActivity.this, orders);
                 listView.setAdapter(adapter);
             }
@@ -181,7 +189,7 @@ public class MainActivity extends AppCompatActivity {
         order.setNote(note);
         order.setStoreInfo((String) spinner.getSelectedItem());
 
-        SaveCallBackWithRealm saveCallBackWithRealm = new SaveCallBackWithRealm(order,new SaveCallback() {
+        SaveCallBackWithRealm saveCallBackWithRealm = new SaveCallBackWithRealm(order, new SaveCallback() {
             @Override
             public void done(ParseException e) {
                 if (e != null) {
