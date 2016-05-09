@@ -18,6 +18,7 @@ import android.view.inputmethod.EditorInfo;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.CheckBox;
+import android.widget.CompoundButton;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.ListView;
@@ -77,7 +78,7 @@ public class MainActivity extends AppCompatActivity {
         listView = (ListView) findViewById(R.id.listView);
         spinner = (Spinner) findViewById(R.id.spinner);
         progressBar = (ProgressBar) findViewById(R.id.progressBar);
-        photoImageView = (ImageView)findViewById(R.id.imageView);
+        photoImageView = (ImageView) findViewById(R.id.imageView);
         orders = new ArrayList<>();
 
         sp = getSharedPreferences("setting", Context.MODE_PRIVATE); //取得 setting 這本字典
@@ -115,6 +116,17 @@ public class MainActivity extends AppCompatActivity {
                     return true;
                 }
                 return false;
+            }
+        });
+
+        checkBox.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                if (isChecked) {
+                    photoImageView.setVisibility(View.GONE);
+                } else {
+                    photoImageView.setVisibility(View.VISIBLE);
+                }
             }
         });
 
@@ -245,7 +257,7 @@ public class MainActivity extends AppCompatActivity {
             if (resultCode == RESULT_OK) {
                 menuResults = data.getStringExtra("result");
             }
-        }else if(requestCode == REQUEST_CODE_CAMERA_ACTIVITY){
+        } else if (requestCode == REQUEST_CODE_CAMERA_ACTIVITY) {
             if (resultCode == RESULT_OK) {
                 photoImageView.setImageURI(Utils.getPhotoURI());
             }
