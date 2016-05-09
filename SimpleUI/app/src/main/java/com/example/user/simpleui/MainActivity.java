@@ -4,6 +4,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
+import android.net.Uri;
 import android.os.Build;
 import android.provider.MediaStore;
 import android.support.design.widget.Snackbar;
@@ -47,6 +48,8 @@ public class MainActivity extends AppCompatActivity {
 
     private static final int REQUEST_CODE_MENU_ACTIVITY = 0;    //final的東西,一定要寫成大寫
     private static final int REQUEST_CODE_CAMERA_ACTIVITY = 1;    //final的東西,一定要寫成大寫
+
+    private boolean hasPhoto = false;   //是否有拍照片
 
     TextView textView;
     EditText editText;
@@ -222,6 +225,17 @@ public class MainActivity extends AppCompatActivity {
         order.setNote(note);
         order.setStoreInfo((String) spinner.getSelectedItem());
 
+        if (hasPhoto) {
+            //讀取圖片
+            Uri uri = Utils.getPhotoURI();
+            byte[] photo = Utils.uriToBytes(this, uri);
+            if (photo == null) {
+                Log.d("Debug", "Read Photo Fail");
+            }else{
+                order.photo = photo;
+            }
+        }
+
         SaveCallBackWithRealm saveCallBackWithRealm = new SaveCallBackWithRealm(order, new SaveCallback() {
             @Override
             public void done(ParseException e) {
@@ -230,6 +244,10 @@ public class MainActivity extends AppCompatActivity {
                 }
                 editText.setText("");
                 menuResults = "";
+
+                //圖檔上傳成功後，刪除圖檔，flag設定回false
+                photoImageView.setImageResource(0);
+                hasPhoto = false;
 
                 setupListView();
             }
@@ -260,6 +278,7 @@ public class MainActivity extends AppCompatActivity {
         } else if (requestCode == REQUEST_CODE_CAMERA_ACTIVITY) {
             if (resultCode == RESULT_OK) {
                 photoImageView.setImageURI(Utils.getPhotoURI());
+                hasPhoto = true;
             }
         }
 
