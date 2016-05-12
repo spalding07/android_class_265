@@ -170,3 +170,32 @@ app:showAsAction="ifRoom"></item>
 -> 若有空間，
 
 call caremy
+
+
+====================================
+第8堂 
+====================================
+scrollView ds 沒有設定，是無限大，所以裡面擺的元件，不能用weight去比例
+
+activity 給資訊使用intent
+
+圖檔 套件
+picasso android
+http://square.github.io/picasso/
+
+
+https://github.com/snowdream/awesome-android#Image_Loading
+
+
+地圖取得經緯度 
+使用 geocode
+http://maps.google.com/maps/api/geocode/json?address=%E5%8F%B0%E5%8C%97%E5%B8%82
+
+
+url 都要丟到 thread 或是 AsyncTask去執行
+因為main thread必須要控主要流程，畫畫面。
+
+
+https://maps.googleapis.com/maps/api/staticmap?center=12,12&size=640x400
+
+檢查使用 Heap -> Update Heap -> Heap -> cause GC => 觀察allocated，看是否有很大
