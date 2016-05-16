@@ -204,4 +204,30 @@ https://maps.googleapis.com/maps/api/staticmap?center=12,12&size=640x400
 ====================================
 第9堂 
 ====================================
+google API developer
 
+->對於 Windows Vista 與 Windows 7，請執行：
+-> 前往 Google Developers Console
+
+-> 使用debug key
+
+
+genomotion 沒有googlePlayService
+
+Genymotion google play 要額外安裝 -> 使用18的版本 + 裝上arm translation 裝上google
+
+ARM Translation(Required):
+http://bit.ly/1RrAzTG
+
+android 4.3:
+http://bit.ly/1RLehLA
+
+直接將 [TechBae.com]Genymotion-ARM-Translation_v1.1 拖移到模擬器 ，成功後重開模擬器
+
+再將  Google Apps for Android 4.3 拖移到模擬器
+
+設定 google play 帳號
+
+下載google map
+
+com.github.jd-alexander:library:1.1.0-
