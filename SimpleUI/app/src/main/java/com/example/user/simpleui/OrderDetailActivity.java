@@ -1,10 +1,12 @@
 package com.example.user.simpleui;
 
+import android.app.admin.SystemUpdatePolicy;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.media.Image;
 import android.os.AsyncTask;
+import android.os.SystemClock;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -61,6 +63,19 @@ public class OrderDetailActivity extends AppCompatActivity {
 //            new ImageLoadingTask(photo).execute(url);
             //顯示google取得的地圖
             (new GeoCodingTask(photo)).execute("台北市羅斯福力四段一號");
+
+            //memirt leak
+//            for(int i = 0 ; i<=10 ; i++){
+//                Thread t = new Thread(new Runnable() {
+//                    @Override
+//                    public void run() {
+//                        while(true){
+//                            SystemClock.sleep(10000);
+//                        }
+//                    }
+//                });
+//            }
+
         }
     }
 

@@ -199,3 +199,7 @@ url 都要丟到 thread 或是 AsyncTask去執行
 https://maps.googleapis.com/maps/api/staticmap?center=12,12&size=640x400
 
 檢查使用 Heap -> Update Heap -> Heap -> cause GC => 觀察allocated，看是否有很大
+
+====================================
+第9堂 
+====================================
