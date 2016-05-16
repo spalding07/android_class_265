@@ -50,7 +50,13 @@
                     android:layout_height="wrap_content"
                     android:id="@+id/photoImageView" />
 
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/mapImageView" />
+
             </LinearLayout>
         </RelativeLayout>
     </ScrollView>
+
 </RelativeLayout>

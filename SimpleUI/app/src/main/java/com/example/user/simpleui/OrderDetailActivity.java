@@ -26,6 +26,9 @@ public class OrderDetailActivity extends AppCompatActivity {
     TextView storeInfo;
     TextView menuResults;
     ImageView photo;
+    ImageView mapImageView;
+    String storeName;
+    String address;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -36,10 +39,15 @@ public class OrderDetailActivity extends AppCompatActivity {
         storeInfo = (TextView) findViewById(R.id.storeInfo);
         menuResults = (TextView) findViewById(R.id.menuResults);
         photo = (ImageView) findViewById(R.id.photoImageView);
+        mapImageView = (ImageView) findViewById(R.id.mapImageView);
 
         Intent intent = getIntent();
         note.setText(intent.getStringExtra("note"));
         storeInfo.setText(intent.getStringExtra("storeInfo"));
+
+        String[] info = intent.getStringExtra("storeInfo").split(",");
+        storeName = info[0];
+        address = info[1];
 
         String results = intent.getStringExtra("menuResults");
         String text = "";
@@ -60,9 +68,9 @@ public class OrderDetailActivity extends AppCompatActivity {
             //使用Picasso套件
 //            Picasso.with(this).load(url).into(photo);
             //顯示圖片
-//            new ImageLoadingTask(photo).execute(url);
+            new ImageLoadingTask(photo).execute(url);
             //顯示google取得的地圖
-            (new GeoCodingTask(photo)).execute("台北市羅斯福力四段一號");
+//            (new GeoCodingTask(photo)).execute("台北市羅斯福力四段一號");
 
             //memirt leak
 //            for(int i = 0 ; i<=10 ; i++){
@@ -75,8 +83,8 @@ public class OrderDetailActivity extends AppCompatActivity {
 //                    }
 //                });
 //            }
-
         }
+        (new GeoCodingTask(mapImageView)).execute(address);
     }
 
     private static class GeoCodingTask extends AsyncTask<String, Void, Bitmap> {

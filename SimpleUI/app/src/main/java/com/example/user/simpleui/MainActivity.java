@@ -178,14 +178,15 @@ public class MainActivity extends AppCompatActivity {
         query.findInBackground(new FindCallback<ParseObject>() {
             @Override
             public void done(List<ParseObject> objects, ParseException e) {
-                if (e != null) {    //錯誤訊息
+                if (e != null || objects == null) {    //錯誤訊息
                     Toast.makeText(MainActivity.this, e.getMessage(), Toast.LENGTH_LONG).show();
                     return;
                 }
                 int size = objects.size();
                 String[] list = new String[size];
                 for (int i = 0; i < size; i++) {
-                    list[i] = objects.get(i).getString("name");
+                    ParseObject parseObject = objects.get(i);
+                    list[i] = parseObject.getString("name") + "," + parseObject.getString("address");
                 }
                 ArrayAdapter<String> arrayAdapter = new ArrayAdapter<String>(MainActivity.this, android.R.layout.simple_spinner_dropdown_item, list);
                 spinner.setAdapter(arrayAdapter);
