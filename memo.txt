@@ -231,3 +231,17 @@ http://bit.ly/1RLehLA
 下載google map
 
 com.github.jd-alexander:library:1.1.0-
+
+
+====================================
+第10堂 
+====================================
+location update 和 得到自己的位置
+
+連線，要先
+1. 轉換成開發者模式
+2. 開發者模式 -> debug要開啟
+3. 連線後，要確定 adb interface 驅動程式有安裝
+
+
+updateLocation 要交給主activity來做
